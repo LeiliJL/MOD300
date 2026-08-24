@@ -1,4 +1,7 @@
 #MOD300-1 26H Anvendt Python programmering og modellering
+
+
+
 In this course you will improve your coding and modelling skills through practical work on larger coding projects. Through group work, you will learn to frame and code models that describe the real world gaining better insight into physical processes. 
 
 The course is meant to be practical, and we will work with projects. The projects will be graded and you will get a feedback that (hopefully) will improve your skills. There are lab hours each Wednesday 12:15-20:00, where you can get help with your projects or Python coding in general.    
