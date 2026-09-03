@@ -1,0 +1,1493 @@
+<!--
+File automatically generated using DocOnce (https://github.com/doconce/doconce/):
+doconce format html project1.do.txt LANG=C.UTF-8 --html_style=bootswatch_readable --html_output=project1-readable --html_code_style=inherit
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Automatic for the People and Derivatives in Your Pocket">
+<title>Automatic for the People and Derivatives in Your Pocket</title>
+<!-- Bootstrap style: bootswatch_readable -->
+<!-- doconce format html project1.do.txt LANG=C.UTF-8 --html_style=bootswatch_readable --html_output=project1-readable --html_code_style=inherit -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Exercise 1: Finite-precision arithmetic',
+               1,
+               'ex:round_err',
+               'ex:round_err'),
+              ('Exercise 2: Get up to speed with NumPy',
+               1,
+               'exer:numpy',
+               'exer:numpy'),
+              ('Exercise 3: Build finite-difference tools',
+               1,
+               'exer:fd',
+               'exer:fd'),
+              ('Exercise 4: Automatic for the people?',
+               1,
+               'exer:autoder',
+               'exer:autoder'),
+              ('A small class first', 2, None, 'a-small-class-first'),
+              ('A specialized application: automatic differentiation',
+               2,
+               None,
+               'a-specialized-application-automatic-differentiation'),
+              ('Addition and subtraction', 2, None, 'addition-and-subtraction'),
+              ('Multiplication and division',
+               2,
+               None,
+               'multiplication-and-division'),
+              ('Elementary functions', 2, None, 'elementary-functions'),
+              ('Exercise 5: Derivatives in your pocket',
+               1,
+               'exer:phyphox',
+               'exer:phyphox'),
+              ('Optional challenge: A derivative in the atmosphere',
+               1,
+               None,
+               'optional-challenge-a-derivative-in-the-atmosphere'),
+              ('Appendix A: Passing arguments to functions',
+               1,
+               None,
+               'appendix-a-passing-arguments-to-functions'),
+              ('Appendix B: Getting set up with phyphox and Python',
+               1,
+               None,
+               'appendix-b-getting-set-up-with-phyphox-and-python'),
+              ('Installing phyphox', 2, None, 'installing-phyphox'),
+              ('Python environment', 2, None, 'python-environment'),
+              ('Guidelines for project submission',
+               1,
+               None,
+               'guidelines-for-project-submission'),
+              ('Bibliography', 1, None, 'bibliography')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project1-readable.html">Automatic for the People and Derivatives in Your Pocket</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#ex:round_err" style="font-size: 80%;"><b>Exercise 1: Finite-precision arithmetic</b></a></li>
+     <!-- navigation toc: --> <li><a href="#exer:numpy" style="font-size: 80%;"><b>Exercise 2: Get up to speed with NumPy</b></a></li>
+     <!-- navigation toc: --> <li><a href="#exer:fd" style="font-size: 80%;"><b>Exercise 3: Build finite-difference tools</b></a></li>
+     <!-- navigation toc: --> <li><a href="#exer:autoder" style="font-size: 80%;"><b>Exercise 4: Automatic for the people?</b></a></li>
+     <!-- navigation toc: --> <li><a href="#a-small-class-first" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A small class first</a></li>
+     <!-- navigation toc: --> <li><a href="#a-specialized-application-automatic-differentiation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A specialized application: automatic differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="#addition-and-subtraction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Addition and subtraction</a></li>
+     <!-- navigation toc: --> <li><a href="#multiplication-and-division" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Multiplication and division</a></li>
+     <!-- navigation toc: --> <li><a href="#elementary-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Elementary functions</a></li>
+     <!-- navigation toc: --> <li><a href="#exer:phyphox" style="font-size: 80%;"><b>Exercise 5: Derivatives in your pocket</b></a></li>
+     <!-- navigation toc: --> <li><a href="#optional-challenge-a-derivative-in-the-atmosphere" style="font-size: 80%;"><b>Optional challenge: A derivative in the atmosphere</b></a></li>
+     <!-- navigation toc: --> <li><a href="#appendix-a-passing-arguments-to-functions" style="font-size: 80%;"><b>Appendix A: Passing arguments to functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="#appendix-b-getting-set-up-with-phyphox-and-python" style="font-size: 80%;"><b>Appendix B: Getting set up with phyphox and Python</b></a></li>
+     <!-- navigation toc: --> <li><a href="#installing-phyphox" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Installing phyphox</a></li>
+     <!-- navigation toc: --> <li><a href="#python-environment" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Python environment</a></li>
+     <!-- navigation toc: --> <li><a href="#guidelines-for-project-submission" style="font-size: 80%;"><b>Guidelines for project submission</b></a></li>
+     <!-- navigation toc: --> <li><a href="#bibliography" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+<div class="container">
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+<div class="jumbotron">
+<center>
+<h1>Automatic for the People and Derivatives in Your Pocket</h1>
+</center>  <!-- document title -->
+
+<!-- author(s): MOD300: Mandatory project 1, Deadline: 6. September 2026 (23:59), and Aksel Hiorth -->
+<center>
+<b>MOD300: Mandatory project 1</b> 
+</center>
+<center>
+<b>Deadline: 6. September 2026 (23:59)</b> 
+</center>
+<center>
+<b>Aksel Hiorth</b> 
+</center>
+<!-- institution(s) -->
+<br>
+<center>
+<h4>Aug 24, 2026</h4>
+</center> <!-- date -->
+<br>
+
+<p>
+<b>Learning objectives.</b>
+By completing this project, the student will:
+</p>
+<ul>
+<li> Get experience in structuring and writing a report.</li>
+<li> Write reusable functions and classes in Python.</li>
+<li> Explore numerical round-off and truncation errors.</li>
+<li> Be introduced to useful Python libraries for scientific computing.</li>
+<li> Collect and analyze real, self-measured data using Python.</li>
+</ul>
+<p>
+<b>Abstract.</b> Because computers have finite memory, numerical errors must always
+be taken into account when doing calculations, especially when
+working with floating-point numbers <a href="#goldberg1991every">[1]</a>.
+In the first parts of this project we investigate round-off errors and
+truncation errors using the Python programming language, and we
+discuss how different implementation strategies affect code
+efficiency and code clarity. You will use object-oriented programming to
+encapsulate data and operations, with automatic differentiation as a compact,
+specialized example <a href="#wengert1964simple">[2]</a>. Automatic differentiation is a
+cornerstone in training neural networks and in many commercial simulation
+codes.
+</p>
+
+<p>At the end you will use the free smartphone app <a href="https://phyphox.org" target="_self">phyphox</a> <a href="#staacks2018advanced">[3]</a>, or a bundled example recording, and apply the very same numerical-differentiation tools you built earlier in the project to real sensor data. Remember to take a look in the Appendix for some tips, and read the guidelines for project submission at the end!</p>
+
+<!-- ======= Introduction   ======= -->
+
+
+</div> <!-- end jumbotron -->
+<h1 id="ex:round_err" class="anchor">Exercise 1: Finite-precision arithmetic</h1>
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<p>Run the following code snippet:</p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">sys</span>
+sys<span style="color: #666">.</span>float_info
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ul>
+<li> Pick three numbers, e.g. <code>max</code>, <code>min</code>, and <code>epsilon</code>, and <em>explain</em> why they have these values.</li>
+</ul>
+<p>Hint: Read the lecture material on the IEEE Standard for floating-point arithmetic.</p>
+
+<p>
+<b>Part 2.</b>
+</p>
+
+<p>In Python, typing <code>0.1+0.2</code> does not (typically) produce the same output as <code>0.3</code>.
+<em>But,</em> <code>0.125+0.25</code> is <em>always</em> equal to <code>0.375</code>
+</p>
+
+<ul>
+<li> Why? Produce your own examples where precision errors appear and where they do not.</li>
+</ul>
+<p>
+<b>Part 3.</b>
+</p>
+
+<ul>
+<li> Should you use the <code>==</code>-operator to test whether two floating-point numbers are equal?</li>
+<li> Why / why not? Can you think of alternative ways to do floating-point number comparison?</li>
+</ul>
+<h1 id="exer:numpy" class="anchor">Exercise 2: Get up to speed with NumPy</h1>
+
+<p>The purpose of this exercise is to learn a little bit about
+<a href="https://numpy.org/" target="_self">NumPy</a>, which is an incredibly useful Python library.
+A major reason for its popularity is efficiency: doing computations with NumPy
+arrays (objects of the type <code>ndarray</code>) instead of using native Python lists (vanilla Python) can,
+by itself, speed up a program by several orders of magnitude!
+The mechanism for speed-up is <a href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" target="_self">vectorized computation</a>.
+</p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Vectorized functions</b>
+<p>Using NumPy arrays allows you to create vectorized functions; functions that
+operate on a whole array at once, rather than looping over the elements
+one-by-one inside a custom written loop.
+</p>
+
+<p>The way vectorization works behind the scenes is still via loops
+(optimized, pre-compiled C code), but as Python programmer you do not need
+to worry about the details.
+</p>
+</div>
+
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<p>The following code block gives an example of a vectorized function:</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x <span style="color: #666">=</span> np<span style="color: #666">.</span>linspace(<span style="color: #666">0</span>, <span style="color: #666">1</span>, <span style="color: #666">10</span>)
+np<span style="color: #666">.</span>exp(x)  <span style="color: #3D7B7B; font-style: italic"># Apply f(t)=exp(t) to each element in the array x.</span>
+np<span style="color: #666">.</span>exp(<span style="color: #666">-</span>x)  <span style="color: #3D7B7B; font-style: italic"># Apply the function f(t)=exp(-t) to each element of x.</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Notice the usage of <code>np.exp</code> instead of using the exponential function provided
+in the built-in <a href="https://docs.python.org/3/library/math.html" target="_self">math</a>
+library; this is an example of a
+<a href="https://docs.scipy.org/doc/numpy/reference/ufuncs.html" target="_self">universal function</a>.
+</p>
+
+<ul>
+<li> Create a native Python list of the same size as <code>x</code> and holding the same values, e.g. with <code>x_list = list(x)</code>. Run</li>
+</ul>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666">.</span>exp(x_list)
+np<span style="color: #666">.</span>exp(<span style="color: #666">-</span>x_list)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul>
+<li> Explain why the first call works while the second one fails before NumPy gets a chance to operate on the list.</li>
+<li> How would you generally evaluate a function on all elements of a native Python list? (as opposed to a NumPy array)</li>
+</ul>
+<p>
+<b>Part 2.</b>
+</p>
+
+<p>As already hinted at, the NumPy library comes with a plethora of useful
+features and functions. The code snippets below show some examples:
+</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666">.</span>zeros(<span style="color: #666">20</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666">.</span>ones(<span style="color: #666">20</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666">.</span>linspace(<span style="color: #666">0</span>, <span style="color: #666">10</span>, <span style="color: #666">11</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666">.</span>linspace(<span style="color: #666">0</span>, <span style="color: #666">10</span>, <span style="color: #666">11</span>, endpoint<span style="color: #666">=</span><span style="color: #008000; font-weight: bold">False</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">vector <span style="color: #666">=</span> np<span style="color: #666">.</span>arange(<span style="color: #666">5</span>) <span style="color: #666">+</span> <span style="color: #666">1</span>
+<span style="color: #666">2*</span>vector
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ul>
+<li> Explain what each line of code does.</li>
+<li> How would you produce the same output using native Python lists?</li>
+</ul>
+<p>
+<b>Part 3.</b>
+</p>
+
+<p>Frequently you will want to extract a subset of values from an array based
+on some kind of criterion. For example, you might want to count the number
+of non-zero numbers, or identify all values exceeding a certain threshold.
+With NumPy, such tasks are easily achieved using
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/02.06-boolean-arrays-and-masks.html" target="_self">boolean masking</a>, e.g.:
+</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">array_of_numbers <span style="color: #666">=</span> np<span style="color: #666">.</span>array([<span style="color: #666">4</span>, <span style="color: #666">8</span>, <span style="color: #666">15</span>, <span style="color: #666">16</span>, <span style="color: #666">23</span>, <span style="color: #666">42</span>,<span style="color: #666">0</span>,<span style="color: #666">5</span>])
+nnz <span style="color: #666">=</span> np<span style="color: #666">.</span>count_nonzero(array_of_numbers)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&#39;There are </span><span style="color: #A45A77; font-weight: bold">{</span>nnz<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> non-zero numbers in the array.&#39;</span>)
+is_even <span style="color: #666">=</span> (array_of_numbers <span style="color: #666">%</span> <span style="color: #666">2</span> <span style="color: #666">==</span> <span style="color: #666">0</span>)
+is_greater_than_17 <span style="color: #666">=</span> (array_of_numbers <span style="color: #666">&gt;</span> <span style="color: #666">17</span>)
+is_even_and_greater_than_17 <span style="color: #666">=</span> is_even <span style="color: #666">&amp;</span> is_greater_than_17
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>However, neither of the following code lines will execute:</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">is_even_and_greater_than_17 <span style="color: #666">=</span> is_even <span style="color: #A2F; font-weight: bold">and</span> is_greater_than_17
+<span style="color: #008000">print</span>(array_of_numbers <span style="color: #666">%</span> <span style="color: #666">2</span> <span style="color: #666">==</span> <span style="color: #666">0</span> <span style="color: #666">&amp;</span> array_of_numbers <span style="color: #666">&gt;</span> <span style="color: #666">17</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ul>
+<li> Explain why this code fails.</li>
+<li> Use <a href="https://numpy.org/doc/stable/reference/generated/numpy.logical_and.html" target="_self"><tt>np.logical_and</tt></a> to make the code work</li>
+</ul>
+<p>
+<b>Part 4.</b>
+</p>
+
+<p>The function <a href="https://numpy.org/doc/stable/reference/generated/numpy.where.html" target="_self">np.where</a>
+can also be used to select elements from an array.
+</p>
+
+<ul>
+<li> Explain the output of the following two lines of code:</li>
+</ul>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666">.</span>where(array_of_numbers <span style="color: #666">&gt;</span> <span style="color: #666">17</span>)[<span style="color: #666">0</span>]
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666">.</span>where(array_of_numbers <span style="color: #666">&gt;</span> <span style="color: #666">17</span>, <span style="color: #666">1</span>, <span style="color: #666">0</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 id="exer:fd" class="anchor">Exercise 3: Build finite-difference tools</h1>
+
+<p>In scientific computing we often need the derivative of either a mathematical
+function or a sequence of measured values. In this exercise you will build
+finite-difference functions that handle an array of values. You will first test
+them on a function with a known derivative and later reuse the <em>same code</em> on
+your own phone data.
+</p>
+
+<p>We use a damped oscillation as our test case:</p>
+$$
+\begin{equation}
+\theta(t)=A e^{-\gamma t}\cos(\omega_0t),
+\qquad A=0.6,\quad \gamma=0.05,\quad \omega_0=\pi .
+\tag{1}
+\end{equation}
+$$
+
+<p>Here \( \theta \) may be interpreted as an angle in radians and \( t \) as time in
+seconds. A vectorized Python implementation is
+</p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">damped_angle</span>(t, A<span style="color: #666">=0.6</span>, gamma<span style="color: #666">=0.05</span>, omega0<span style="color: #666">=</span>np<span style="color: #666">.</span>pi):
+    <span style="color: #008000; font-weight: bold">return</span> A<span style="color: #666">*</span>np<span style="color: #666">.</span>exp(<span style="color: #666">-</span>gamma<span style="color: #666">*</span>t)<span style="color: #666">*</span>np<span style="color: #666">.</span>cos(omega0<span style="color: #666">*</span>t)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>It works for both a single number and a NumPy array.</p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Build small functions and reuse them</b>
+<p>The two finite-difference functions you write below operate only on sampled
+values and a spacing. A separate wrapper will adapt them to arbitrary Python
+functions. Keeping these jobs separate makes the code easier to test and is
+what allows you to reuse the numerical core in Exercise 5.
+</p>
+</div>
+
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<p>The analytical angular velocity is</p>
+$$
+\begin{equation}
+\omega(t)=\theta^\prime(t)
+=-A e^{-\gamma t}
+\left[\gamma\cos(\omega_0t)+\omega_0\sin(\omega_0t)\right].
+\tag{2}
+\end{equation}
+$$
+
+
+<ul>
+<li> Implement equation <a href="#mjx-eqn-2">(2)</a> as a Python function named <code>damped_velocity</code>.</li>
+<li> Plot \( \theta(t) \) and \( \omega(t) \) for \( 0\leq t\leq 10 \) s in two panels. Label the axes and include the parameter values in your figure caption.</li>
+</ul>
+<center> <!-- figure label: --> <div id="fig:p1:wave"></div> <!-- FIGURE -->
+<hr class="figure">
+<center>
+<p class="caption">Figure 1: The damped angle and its analytical angular velocity for the default parameters.  <!-- caption label: fig:p1:wave --></p>
+</center>
+<p><img src="fig-project1/wave.png" align="bottom"></p>
+</center>
+
+<p>
+<b>Part 2.</b>
+</p>
+
+<p>Suppose <code>y</code> contains uniformly spaced samples with spacing \( h \). The forward
+and central differences are
+</p>
+$$
+\begin{align}
+D_{\mathrm{f}}y_i &= \frac{y_{i+1}-y_i}{h},
+\tag{3}\\ 
+D_{\mathrm{c}}y_i &= \frac{y_{i+1}-y_{i-1}}{2h}.
+\tag{4}
+\end{align}
+$$
+
+
+<ul>
+<li> Write the functions</li>
+</ul>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">forward_diff</span>(y, h):
+    <span style="color: #3D7B7B; font-style: italic"># your code</span>
+
+<span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">central_diff</span>(y, h):
+    <span style="color: #3D7B7B; font-style: italic"># your code</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Do not use a Python loop. <code>forward_diff(y, h)</code> must return an array of length
+<code>len(y)-1</code> and <code>central_diff(y, h)</code> an array of length <code>len(y)-2</code>. Test both
+functions on a linear function, whose derivative is constant, and a quadratic
+function, whose derivative is known.
+</p>
+
+<p>
+<b>Part 3.</b>
+</p>
+
+<p>Python functions are <a href="https://en.wikipedia.org/wiki/First-class_function" target="_self">first-class objects</a>:
+they can be passed as arguments to other functions. Build a wrapper with the
+following interface:
+</p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">derivative_at</span>(f, x, h, method, <span style="color: #666">*</span>args, <span style="color: #666">**</span>kwargs):
+    <span style="color: #3D7B7B; font-style: italic"># evaluate f at the two or three points needed by method,</span>
+    <span style="color: #3D7B7B; font-style: italic"># then call forward_diff or central_diff</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>The argument <code>method</code> must be either your <code>forward_diff</code> or <code>central_diff</code>
+function. Extra positional and keyword arguments must be passed on to <code>f</code>.
+Appendix A contains a short explanation of <code>*args</code> and <code>**kwargs</code>.
+</p>
+
+<ul>
+<li> Use <code>derivative_at</code> to estimate \( \omega(0.8) \) with both methods and \( h=10^{-2} \).</li>
+<li> Compare both estimates with <code>damped_velocity(0.8)</code>.</li>
+<li> Repeat the calculation with at least one non-default choice of \( A \), \( \gamma \), or \( \omega_0 \) to demonstrate that the extra arguments work.</li>
+</ul>
+<p>
+<b>Part 4.</b>
+</p>
+
+<p>Quantify the numerical error at \( t=0.8 \):</p>
+
+<ul>
+<li> Generate logarithmically spaced step sizes from \( 10^{-16} \) to \( 10^0 \).</li>
+<li> For each \( h \), calculate the absolute forward- and central-difference errors.</li>
+<li> Plot both error curves in the same log-log figure.</li>
+<li> Report the best \( h \) and the smallest error for each method.</li>
+<li> Explain the large-\( h \) truncation-error region, the small-\( h \) round-off-error region, and why the central difference normally reaches a smaller error.</li>
+</ul>
+<p>Keep <code>forward_diff</code> and <code>central_diff</code> unchanged after this point: they are
+part of the code you will reuse in Exercise 5.
+</p>
+<h1 id="exer:autoder" class="anchor">Exercise 4: Automatic for the people?</h1>
+<p>The main purpose of this exercise is to practise writing and using Python
+classes. A class bundles related data and the methods that operate on those
+data. For example, every Python string is an object with useful methods:
+</p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x <span style="color: #666">=</span> <span style="color: #BA2121">&#39;This is a string&#39;</span>
+x<span style="color: #666">.</span>upper()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>The call <code>x.upper()</code> returns <code>'THIS IS A STRING'</code>. Classes are used throughout
+engineering software to represent objects such as sensors, materials,
+geometries, and numerical models. The implementation is written once and can
+then be reused for many objects.
+</p>
+<h2 id="a-small-class-first" class="anchor">A small class first </h2>
+<p>Here is a class that stores the coordinates of a point together with an
+operation that belongs naturally to a point:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">numpy</span><span style="color: #BBB"> </span><span style="color: #008000; font-weight: bold">as</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">class</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">Point</span>:
+    <span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">__init__</span>(<span style="color: #008000">self</span>, x, y):
+        <span style="color: #008000">self</span><span style="color: #666">.</span>x <span style="color: #666">=</span> x
+        <span style="color: #008000">self</span><span style="color: #666">.</span>y <span style="color: #666">=</span> y
+
+    <span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">distance_from_origin</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666">.</span>sqrt(<span style="color: #008000">self</span><span style="color: #666">.</span>x<span style="color: #666">**2</span> <span style="color: #666">+</span> <span style="color: #008000">self</span><span style="color: #666">.</span>y<span style="color: #666">**2</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<ul>
+<li> Create two <code>Point</code> objects and call <code>distance_from_origin()</code> for both.</li>
+<li> Add a method <code>move(self, dx, dy)</code> that changes the coordinates by <code>dx</code> and <code>dy</code>. Test it on one of your points.</li>
+<li> Identify the data and the operations that the class keeps together.</li>
+</ul>
+<h2 id="a-specialized-application-automatic-differentiation" class="anchor">A specialized application: automatic differentiation </h2>
+<p>Automatic differentiation is a specialized application of classes. We use it
+here because it gives a compact example of encapsulation: a function value and
+its derivative are stored together, while the rules of differentiation are
+implemented once and reused in many calculations. Redefining operators such
+as <code>+</code> and <code>*</code> is not necessary for most Python classes, but it is particularly
+convenient in this example.
+</p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Automatic differentiation</b>
+<p>Numerical differentiation approximates a derivative by subtracting nearby
+values. Automatic differentiation instead carries the value and derivative
+through every elementary operation by applying the usual calculus rules
+<a href="#wengert1964simple">[2]</a>.
+</p>
+</div>
+
+
+<p>For every intermediate quantity we store</p>
+$$
+\begin{equation}
+\begin{pmatrix}
+f(x) \\ f^\prime(x)
+\end{pmatrix}.
+\tag{5}
+\end{equation}
+$$
+
+<p>We call this pair a <em>dual number</em>. Begin with the following class:</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">class</span><span style="color: #BBB"> </span><span style="color: #00F; font-weight: bold">Dual</span>:
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Store a function value and its derivative.&quot;&quot;&quot;</span>
+
+    <span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">__init__</span>(<span style="color: #008000">self</span>, value, derivative<span style="color: #666">=0.0</span>):
+        <span style="color: #008000">self</span><span style="color: #666">.</span>value <span style="color: #666">=</span> value
+        <span style="color: #008000">self</span><span style="color: #666">.</span>derivative <span style="color: #666">=</span> derivative
+
+    <span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">__repr__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">f&quot;Dual(value=</span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">self</span><span style="color: #666">.</span>value<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">, derivative=</span><span style="color: #A45A77; font-weight: bold">{</span><span style="color: #008000">self</span><span style="color: #666">.</span>derivative<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121">)&quot;</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>
+<b>Part 2.</b>
+</p>
+
+<ul>
+<li> Create <code>x = Dual(3, 1)</code> and <code>c = Dual(3)</code>. Print both objects and explain why their derivatives differ.</li>
+<li> Which data are encapsulated in each <code>Dual</code> object?</li>
+</ul>
+<h2 id="addition-and-subtraction" class="anchor">Addition and subtraction  </h2>
+<p>If \( u \) and \( v \) depend on \( x \), then</p>
+$$
+(u+v)' = u' + v', \qquad (u-v)' = u' - v'.
+$$
+
+<p>Create two objects and try to add them:</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">u <span style="color: #666">=</span> Dual(<span style="color: #666">1</span>, <span style="color: #666">2</span>)
+v <span style="color: #666">=</span> Dual(<span style="color: #666">3</span>, <span style="color: #666">4</span>)
+<span style="color: #008000">print</span>(u <span style="color: #666">+</span> v)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Python initially reports an error because it does not yet know what <code>+</code> means
+for our class. We define the operation once by adding this method inside
+<code>Dual</code>:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">    <span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">__add__</span>(<span style="color: #008000">self</span>, other):
+        <span style="color: #008000; font-weight: bold">return</span> Dual(<span style="color: #008000">self</span><span style="color: #666">.</span>value <span style="color: #666">+</span> other<span style="color: #666">.</span>value,
+                    <span style="color: #008000">self</span><span style="color: #666">.</span>derivative <span style="color: #666">+</span> other<span style="color: #666">.</span>derivative)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>In this exercise, arithmetic operations combine two <code>Dual</code> objects. Represent
+an ordinary constant \( c \) by <code>Dual(c)</code>, because its derivative is zero. Keeping
+this convention lets us concentrate on the rules of differentiation.
+</p>
+
+<p>
+<b>Part 3.</b>
+</p>
+
+<p>Add the worked <code>__add__</code> method to your class and check that <code>u + v</code> now gives
+value 4 and derivative 6. Then implement <code>__sub__</code> and <code>__neg__</code>.
+</p>
+
+<p>Test your implementation with</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(u <span style="color: #666">+</span> v)  <span style="color: #3D7B7B; font-style: italic"># value 4, derivative 6</span>
+<span style="color: #008000">print</span>(u <span style="color: #666">-</span> v)  <span style="color: #3D7B7B; font-style: italic"># value -2, derivative -2</span>
+<span style="color: #008000">print</span>(<span style="color: #666">-</span>u)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="multiplication-and-division" class="anchor">Multiplication and division  </h2>
+<p>Multiplication and division use the product and quotient rules:</p>
+$$
+
+\begin{align}
+(f(x)\cdot g(x))^\prime &=f^\prime(x)\cdot g(x)+f(x)\cdot g^\prime(x),
+\tag{6} \\ 
+\left(\frac{f(x)}{g(x)}\right)^\prime &=\frac{f^\prime(x)\cdot g(x)-f(x)\cdot g^\prime(x)}{g(x)^2}.
+\tag{7}
+\end{align}
+$$
+
+<p>
+<b>Part 4.</b>
+</p>
+
+<p>Implement <code>__mul__</code> and <code>__truediv__</code> using the rules above.</p>
+
+<p>Test the class on expressions whose analytical derivatives you know:</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x <span style="color: #666">=</span> <span style="color: #666">1.2</span>
+One <span style="color: #666">=</span> Dual(<span style="color: #666">1.0</span>)       <span style="color: #3D7B7B; font-style: italic"># a constant has derivative 0</span>
+X <span style="color: #666">=</span> Dual(x, <span style="color: #666">1</span>)       <span style="color: #3D7B7B; font-style: italic"># x has derivative 1 with respect to itself</span>
+<span style="color: #008000">print</span>(X<span style="color: #666">*</span>X<span style="color: #666">*</span>X)         <span style="color: #3D7B7B; font-style: italic"># compare with x**3 and 3*x**2</span>
+<span style="color: #008000">print</span>(One<span style="color: #666">/</span>(One<span style="color: #666">+</span>X))   <span style="color: #3D7B7B; font-style: italic"># compare with 1/(1+x) and -1/(1+x)**2</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="elementary-functions" class="anchor">Elementary functions </h2>
+<p>Arithmetic is not enough for our damped oscillation: we also need the chain
+rule
+</p>
+$$
+\begin{equation}
+f(g(x))^\prime=f^\prime(g(x))\cdot g^\prime (x).
+\tag{8}
+\end{equation}
+$$
+
+<p>
+<b>Part 5.</b>
+</p>
+
+<p>The exponential function provides a pattern:</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">dual_exp</span>(d):
+    value <span style="color: #666">=</span> np<span style="color: #666">.</span>exp(d<span style="color: #666">.</span>value)
+    <span style="color: #008000; font-weight: bold">return</span> Dual(value, value<span style="color: #666">*</span>d<span style="color: #666">.</span>derivative)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Write <code>dual_cos(d)</code> in the same way. It should take a <code>Dual</code> and return a new
+<code>Dual</code> containing the cosine and its derivative from the chain rule. Test both
+functions using <code>Dual(0.4, 1)</code>.
+</p>
+
+<p>
+<b>Part 6.</b>
+</p>
+
+<p>Use your class to evaluate the damped oscillation from Exercise 3:</p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">t <span style="color: #666">=</span> <span style="color: #666">0.8</span>
+T <span style="color: #666">=</span> Dual(t, <span style="color: #666">1</span>)
+A <span style="color: #666">=</span> Dual(<span style="color: #666">0.6</span>)
+Gamma <span style="color: #666">=</span> Dual(<span style="color: #666">0.05</span>)
+Omega0 <span style="color: #666">=</span> Dual(np<span style="color: #666">.</span>pi)
+
+theta_dual <span style="color: #666">=</span> A<span style="color: #666">*</span>dual_exp(<span style="color: #666">-</span>Gamma<span style="color: #666">*</span>T)<span style="color: #666">*</span>dual_cos(Omega0<span style="color: #666">*</span>T)
+<span style="color: #008000">print</span>(theta_dual)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ul>
+<li> Compare the automatic result with the two analytical functions:</li>
+</ul>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(theta_dual<span style="color: #666">.</span>value, damped_angle(t))
+<span style="color: #008000">print</span>(theta_dual<span style="color: #666">.</span>derivative, damped_velocity(t))
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul>
+<li> Repeat the calculation at two other values of \( t \). Notice that the class and its differentiation rules do not change when the expression changes.</li>
+<li> Compare the automatic derivative with the forward and central estimates from Exercise 3.</li>
+</ul>
+<p>
+<b>Part 7.</b>
+</p>
+
+<p>In three to five sentences, explain what <code>Point</code> and <code>Dual</code> encapsulate and
+where code is reused. Also explain why a class is broadly useful even though
+automatic differentiation and operator overloading are specialized examples.
+</p>
+<h1 id="exer:phyphox" class="anchor">Exercise 5: Derivatives in your pocket</h1>
+
+<p>Make a motion, record it, and run the code you
+built on your own data. The goal is not a precise physical experiment. We want
+to see that integrating an angular velocity produces an angle and that
+differentiating that angle approximately recovers the signal we started with:
+</p>
+$$
+\omega(t)\ \xrightarrow{\text{integrate}}\ \theta(t)\ 
+\xrightarrow{\text{differentiate}}\ \widehat{\omega}(t)\approx\omega(t).
+$$
+
+<p><a href="https://phyphox.org" target="_self">phyphox</a> (PHYsical PHone eXperiments) is a free app
+that logs a phone's sensors and exports the data as CSV <a href="#staacks2018advanced">[3]</a>.
+Open <em>Sensor \( \to \) Gyroscope</em>. Record 10&ndash;20 seconds while you safely rock or
+rotate the phone by hand. You may make a regular oscillation, draw a pattern
+through the air, or invent another motion. 	 
+</p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>No suitable phone or recording?</b>
+<p>Use the bundled <code>data/gyroscope_example.csv</code> and do exactly the same analysis.
+Using the example data does not reduce the assessment. The interesting part
+here is the code that you write.
+</p>
+</div>
+
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<p>Export the recording as CSV and load it with pandas. (NB: The exact column names can
+vary slightly between app versions.)
+</p>
+
+<ul>
+<li> Plot the signed gyroscope \( x \), \( y \), and \( z \) channels in the same figure.</li>
+<li> Choose one signed channel with a clearly visible signal and call it <code>omega</code>.</li>
+<li> <em>Do not</em> use the <code>Absolute</code> channel: it has no sign, so clockwise and counter-clockwise rotations cannot cancel during integration.</li>
+</ul>
+<p>
+<b>Part 2.</b>
+</p>
+
+<p>The gyroscope measures angular velocity \( \omega(t) \) directly, not the angle
+\( \theta(t) \). Extract the timestamp as <code>t</code> and use the following implementation
+of the composite trapezoidal rule:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">cumulative_trapezoid</span>(y, t, initial<span style="color: #666">=0.0</span>):
+<span style="color: #BBB">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the cumulative integral of y with the same length as y.&quot;&quot;&quot;</span>
+    areas <span style="color: #666">=</span> <span style="color: #666">0.5*</span>(y[<span style="color: #666">1</span>:] <span style="color: #666">+</span> y[:<span style="color: #666">-1</span>])<span style="color: #666">*</span>np<span style="color: #666">.</span>diff(t)
+    <span style="color: #008000; font-weight: bold">return</span> initial <span style="color: #666">+</span> np<span style="color: #666">.</span>concatenate(([<span style="color: #666">0.0</span>], np<span style="color: #666">.</span>cumsum(areas)))
+
+theta <span style="color: #666">=</span> cumulative_trapezoid(omega, t)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Plot the resulting angle \( \theta(t) \). You do not need to know its starting
+value: choosing <code>initial=0.0</code> only shifts the entire angle curve vertically.
+</p>
+
+<p>
+<b>Part 3.</b>
+</p>
+
+<p>Apply your <em>unmodified</em> <code>forward_diff</code> and <code>central_diff</code> functions from
+Exercise 3 to <code>theta</code>.
+</p>
+
+<ul>
+<li> Make an overlay plot containing the original signal and both reconstructed</li>
+</ul>
+<p>signals. Zoom in if that makes the comparison clearer.</p>
+<ul>
+<li> Add two or three sentences: did you approximately recover the original signal, and can you</li>
+</ul>
+<p>recognize something you did with the phone in the plot?</p>
+<h1 id="optional-challenge-a-derivative-in-the-atmosphere" class="anchor">Optional challenge: A derivative in the atmosphere </h1>
+<div class="alert alert-block alert-success alert-text-normal"><b>This part is optional</b>
+<p>The required project ends with your creative phone analysis above. This
+extension is available if you want to apply the same code to a very different
+real dataset.
+</p>
+</div>
+
+
+<p>In a deliberately simplified one-box model, atmospheric methane (CH$_4$) is
+removed with a fixed lifetime:
+</p>
+$$
+\begin{equation}
+\frac{d(\Delta M)}{dt} = \frac{E_{\mathrm{CH_4}}(t)}{2.75} - \frac{\Delta M}{\tau},
+\qquad \tau=9.1\text{ years},
+\tag{9}
+\end{equation}
+$$
+
+<p>Here \( \Delta M \) [ppb] is the methane concentration anomaly above the
+pre-industrial value \( M_0=700 \) ppb, \( E_{\mathrm{CH_4}}(t) \) [Tg/yr] is an
+effective emission rate under this model, and
+\( 1\text{ ppb CH}_4=2.75\text{ Tg CH}_4 \). Bundled with this project is
+<code>data/ch4_annual.dat</code>: NOAA's global annual
+mean atmospheric CH$_4$ record, 1984&ndash;2025 <a href="#noaa_ch4">[4]</a>.
+</p>
+
+<ul>
+<li> Rearrange equation <a href="#mjx-eqn-9">(9)</a> to solve for \( E_{\mathrm{CH_4}}(t) \) in terms of \( \Delta M \) and its time derivative.</li>
+<li> Estimate \( d(\Delta M)/dt \) with your unmodified <code>central_diff</code> function and \( h=1 \) year.</li>
+<li> Plot the effective emission rate and comment on one visible feature. Be clear that the result follows from the assumed one-box, fixed-lifetime model and is not a full atmospheric inversion.</li>
+</ul>
+<h1 id="appendix-a-passing-arguments-to-functions" class="anchor">Appendix A: Passing arguments to functions  </h1>
+<p>The wrapper in Exercise 3 must work with functions that have different
+parameters. Python's <code>*args</code> collects extra positional arguments and
+<code>**kwargs</code> collects extra keyword arguments. Both can be forwarded without
+the wrapper knowing their names:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span><span style="color: #BBB"> </span><span style="color: #00F">call_function</span>(f, x, <span style="color: #666">*</span>args, <span style="color: #666">**</span>kwargs):
+    <span style="color: #008000; font-weight: bold">return</span> f(x, <span style="color: #666">*</span>args, <span style="color: #666">**</span>kwargs)
+
+<span style="color: #3D7B7B; font-style: italic"># Positional parameters: A, gamma, omega0</span>
+call_function(damped_angle, <span style="color: #666">0.8</span>, <span style="color: #666">0.6</span>, <span style="color: #666">0.05</span>, np<span style="color: #666">.</span>pi)
+
+<span style="color: #3D7B7B; font-style: italic"># The same parameters passed by name</span>
+call_function(
+    damped_angle,
+    <span style="color: #666">0.8</span>,
+    A<span style="color: #666">=0.6</span>,
+    gamma<span style="color: #666">=0.05</span>,
+    omega0<span style="color: #666">=</span>np<span style="color: #666">.</span>pi,
+)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Your <code>derivative_at</code> function uses exactly the same forwarding pattern when it
+evaluates <code>f</code> at the points required by the chosen finite-difference method:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">derivative_at(
+    damped_angle,
+    <span style="color: #666">0.8</span>,
+    <span style="color: #666">1e-3</span>,
+    central_diff,
+    A<span style="color: #666">=0.6</span>,
+    gamma<span style="color: #666">=0.05</span>,
+    omega0<span style="color: #666">=</span>np<span style="color: #666">.</span>pi,
+)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 id="appendix-b-getting-set-up-with-phyphox-and-python" class="anchor">Appendix B: Getting set up with phyphox and Python  </h1>
+<h2 id="installing-phyphox" class="anchor">Installing phyphox </h2>
+
+<p>phyphox is free and available from the app store on your phone:</p>
+<ul>
+<li> iOS: search for "phyphox" in the App Store.</li>
+<li> Android: search for "phyphox" in the Google Play Store.</li>
+</ul>
+<p>No account or sign-up is required. Once installed, browse to <em>Sensor
+\( \to \) Gyroscope</em> (the experiment used in Exercise 5), press record, and use
+the export button (usually a share/export icon) to save your recording as a
+CSV file.
+</p>
+<h2 id="python-environment" class="anchor">Python environment </h2>
+
+<p>Unlike previous years, this project does <em>not</em> need any exotic packages &ndash;
+a standard scientific-Python environment with <code>numpy</code>, <code>scipy</code>, <code>matplotlib</code>,
+and <code>pandas</code> is all you need. If you do not already have such an environment,
+you can create one with <code>conda</code>:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda create <span style="color: #666">-</span>n project1 python<span style="color: #666">=3.11</span> numpy scipy matplotlib pandas jupyter <span style="color: #666">-</span>c conda<span style="color: #666">-</span>forge
+conda activate project1
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Remember to select this environment (or its Jupyter kernel) in whichever
+tool you use to write your notebook (VS Code, Jupyter, Colab, ...).
+</p>
+<h1 id="guidelines-for-project-submission" class="anchor">Guidelines for project submission </h1>
+
+<p>You should bear the following points in mind when working on the project:</p>
+<ul>
+<li> Write the name of all persons working in the group at the top of the notebook.</li>
+<li> The final project report must start with an abstract, the abstract is a self contained summary of the project and should contain quantitative statements.</li>
+<li> Start your notebook by providing a short introduction in which you outline the nature of the problem(s) to be investigated.</li>
+<li> End your notebook with a brief summary of what you feel you learned from the project (if anything). Also, if you have any general comments or suggestions for what could be improved in future assignments, this is the place to do it.</li>
+<li> All code that you make use of should be present in the notebook, and it should ideally execute without any errors (especially run-time errors). If you are not able to fix everything before the deadline, you should give your best understanding of what is not working, and how you might go about fixing it.</li>
+<li> Avoid duplicating code! If you find yourself copying and pasting a lot of code, it is a strong indication that you should define reuseable functions and/or classes.</li>
+<li> If you use an algorithm that is not fully described in the assignment text, you should try to explain it in your own words. This also applies if the method is described elsewhere in the course material.</li>
+<li> In some cases it may suffice to explain your work via comments in the code itself, but other times you might want to include a more elaborate explanation in terms of, e.g., mathematics and/or pseudocode.</li>
+<li> In general, it is a good habit to comment your code (though it can be overdone).</li>
+<li> When working with approximate solutions to equations, it is very useful to check your results against known exact (analytical) solutions, should they be available.</li>
+<li> It is also a good test of a model implementation to study what happens at known 'edge cases'.</li>
+<li> Any figures you include should be easily understandable. You should label axes appropriately, and depending on the problem, include other legends etc. Also, you should discuss your figures in the main text.</li>
+<li> It is always good if you can reflect a little bit around <em>why</em> you see what you see.</li>
+</ul>
+<h1 id="bibliography" class="anchor">Bibliography </h1>
+
+<!-- begin bibliography -->
+<ol>
+ <li> <div id="goldberg1991every"></div> <b>D. Goldberg</b>.  What Every Computer Scientist Should Know About Floating-Point Arithmetic, <em>ACM computing surveys (CSUR)</em>, 23(1), pp. 5-48, 1991.</li>
+ <li> <div id="wengert1964simple"></div> <b>R. E. Wengert</b>.  A Simple Automatic Derivative Evaluation Program, <em>Communications of the ACM</em>, 7(8), pp. 463-464, 1964.</li>
+ <li> <div id="staacks2018advanced"></div> <b>S. Staacks, S. Hutz, H. Heinke and C. Stampfer</b>.  Advanced Tools for Smartphone-Based Experiments: Phyphox, vol. 53, pp. pp. 045009, 2018.</li>
+ <li> <div id="noaa_ch4"></div> <b>N. G. M. Laboratory</b>.  Trends in Atmospheric Methane, Global Monitoring Laboratory, 2025, Annual global mean CH$_4$ mole fraction. Accessed: 2026-07-30, <a href="https://gml.noaa.gov/ccgg/trends_ch4/" target="_self"><tt>https://gml.noaa.gov/ccgg/trends_ch4/</tt></a>.</li>
+</ol>
+<!-- end bibliography -->
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap footer
+<footer>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
+</footer>
+-->
+</body>
+</html>
+
